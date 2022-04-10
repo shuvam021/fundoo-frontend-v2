@@ -11,7 +11,7 @@ export default function TakeNoteOne(props) {
     const toggleBox = () => toggleNoteBox();
 
     return (
-        <Box onClick={toggleBox}>
+        <Box onClick={toggleBox} sx={{px:2, py:1}}>
             <Grid container alignItems={"center"}>
                 <Grid item xs={9}>
                     <InputField fullWidth placeholder="Take Note ..." size={"small"}/>

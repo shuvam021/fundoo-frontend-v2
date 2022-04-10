@@ -1,5 +1,5 @@
-import React from "react";
-import {Button, Grid, IconButton} from "@mui/material";
+import React, {useState} from "react";
+import {Box, Button, Grid, IconButton} from "@mui/material";
 import {
     AddAlertOutlined,
     ArchiveOutlined,
@@ -11,36 +11,66 @@ import {
     UndoOutlined
 } from '@mui/icons-material';
 import {InputField} from "./TakeNoteOne";
+import {postNoteAPI} from "../../services/note";
+import ColorPopper from "../ColorPopper";
 
 
-const iconList = [
-    <AddAlertOutlined fontSize={"inherit"}/>,
-    <PersonAddAlt fontSize={"inherit"}/>,
-    <PaletteOutlined fontSize={"inherit"}/>,
-    <ImageOutlined fontSize={"inherit"}/>,
-    <ArchiveOutlined fontSize={"inherit"}/>,
-    <MoreVertOutlined fontSize={"inherit"}/>,
-    <UndoOutlined fontSize={"inherit"}/>,
-    <RedoOutlined fontSize={"inherit"}/>,
-    // <ColorPopper action="create" colorHandler={colorHandler}/>
-]
+export default function TakeNoteTwo(props) {
+    const {toggleNoteBox} = props
+    const [data, setData] = useState({
+        title: '',
+        description: '',
+        color: '',
+        is_archived: false
+    });
+    const submitData = () => {
+        postNoteAPI(data)
+            .then(res => console.log(res))
+            .catch(err => console.error(err))
+        toggleNoteBox()
+    }
 
+    const noteTwoColorUpdate = color => setData({...data, color: color })
 
-export default function TakeNoteTwo() {
+    const iconList = [
+        <AddAlertOutlined fontSize={"inherit"}/>,
+        <PersonAddAlt fontSize={"inherit"}/>,
+        <ImageOutlined fontSize={"inherit"}/>,
+        <MoreVertOutlined fontSize={"inherit"}/>,
+        <UndoOutlined fontSize={"inherit"}/>,
+        <RedoOutlined fontSize={"inherit"}/>,
+    ]
+
     return (
-        <React.Fragment>
-            <Grid container alignItems={"center"} spacing={2}>
-                <Grid item xs={12}><InputField fullWidth placeholder="Title ..." size="small"/></Grid>
-                <Grid item xs={12}><InputField fullWidth placeholder="Take Note ..." size="small"/></Grid>
+        <Box sx={{backgroundColor: data.color, p:1, borderRadius:1}}>
+            <Grid container alignItems={"center"}>
+                <Grid item xs={12}>
+                    <InputField
+                        fullWidth placeholder="Title..." size="small"
+                        onChange={e => setData({...data, title: e.target.value})}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <InputField
+                        fullWidth placeholder="Take Note..." size="small"
+                        onChange={e => setData({...data, description: e.target.value})}
+                    />
+                </Grid>
                 <Grid item xs={12}>
                     <Grid container>
+
                         <Grid item xs={10} sx={{display: "flex", justifyContent: "space-around"}}>
+                            <IconButton size={"small"} onClick={e => setData({...data, is_archived: true})}>
+                                <ArchiveOutlined fontSize={"inherit"}/>
+                            </IconButton>
+                            <ColorPopper action="create" colorHandler={noteTwoColorUpdate}/>
                             {iconList.map((item, i) => (<IconButton key={i} size={"small"}>{item}</IconButton>))}
                         </Grid>
-                        <Grid item xs={2}><Button>Close</Button></Grid>
+
+                        <Grid item xs={2}><Button onClick={submitData}>Close</Button></Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </React.Fragment>
+        </Box>
     )
 }
