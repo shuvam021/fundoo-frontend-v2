@@ -1,11 +1,13 @@
 import './App.css';
-import Dashboard from "./pages/Dashboard";
 import React from "react";
+import Dashboard from "./pages/Dashboard";
+import LogIn from "./pages/LogIn";
 
 function App() {
     return (
         <div className="App">
-            <Dashboard />
+            {/*<Dashboard />*/}
+            <LogIn />
         </div>
     );
 }
