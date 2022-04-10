@@ -2,14 +2,13 @@ import React from "react";
 import logo from "../assets/logo.png"
 import {alpha, styled} from '@mui/material/styles';
 import {AppBar, Box, IconButton, InputBase, Toolbar, Typography} from "@mui/material";
-// icons
 import {
-    AppsOutlined as AppsOutlinedIcon,
-    DnsOutlined as DnsOutlinedIcon,
-    Menu as MenuIcon,
-    RefreshOutlined as RefreshOutlinedIcon,
+    AppsOutlined,
+    DnsOutlined,
+    Menu,
+    RefreshOutlined,
     Search as SearchIcon,
-    SettingsOutlined as SettingsOutlinedIcon
+    SettingsOutlined
 } from '@mui/icons-material';
 
 
@@ -53,16 +52,16 @@ const IconContainer = styled('div')(({theme}) => ({
     },
 }));
 
-const IconBox = styled('Box')(({theme}) => ({
+const IconBox = styled(Box)(({theme}) => ({
     width: "100%",
     padding: 0,
-    '&:nth-child(1), &:nth-child(2), &:nth-child(3)': {
+    '&:nth-of-type(1), &:nth-of-type(2), &:nth-of-type(3)': {
         [theme.breakpoints.down('lg')]: {width: 'auto'},
     },
-    '&:nth-child(1), &:nth-child(2)': {
+    '&:nth-of-type(1), &:nth-of-type(2)': {
         [theme.breakpoints.down('sm')]: {display: 'none'},
     },
-    '&:nth-child(1)': {
+    '&:nth-of-type(1)': {
         [theme.breakpoints.up('lg')]: {display: "none",},
         [theme.breakpoints.down('lg')]: {display: "block",},
         [theme.breakpoints.down('sm')]: {display: "none",},
@@ -77,26 +76,22 @@ export default function NavBar() {
         <React.Fragment>
             <AppBar color="inherit" position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
                 <Toolbar>
-                    <IconButton><MenuIcon/></IconButton>
+                    <IconButton><Menu/></IconButton>
                     <Box component={"img"} src={logo}/>
                     <Typography variant="h6" noWrap component="div">Keep</Typography>
                     <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon/>
-                        </SearchIconWrapper>
+                        <SearchIconWrapper><SearchIcon/></SearchIconWrapper>
                         <StyledInputBase placeholder="Search…" inputProps={{'aria-label': 'search'}}/>
                     </Search>
                     <IconContainer>
+                        <IconBox><IconButton><SearchIcon/></IconButton></IconBox>
                         <IconBox>
-                            <IconButton><SearchIcon/></IconButton>
+                            <IconButton><RefreshOutlined/></IconButton>
+                            <IconButton><DnsOutlined/></IconButton>
+                            <IconButton><SettingsOutlined/></IconButton>
                         </IconBox>
                         <IconBox>
-                            <IconButton><RefreshOutlinedIcon/></IconButton>
-                            <IconButton><DnsOutlinedIcon/></IconButton>
-                            <IconButton><SettingsOutlinedIcon/></IconButton>
-                        </IconBox>
-                        <IconBox>
-                            <IconButton><AppsOutlinedIcon/></IconButton>
+                            <IconButton><AppsOutlined/></IconButton>
                             <IconButton size={"small"} variant={"outlined"} sx={ProfileBtnStyle}>
                                 <Typography>S</Typography>
                             </IconButton>

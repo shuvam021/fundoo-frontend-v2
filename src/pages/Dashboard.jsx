@@ -1,16 +1,35 @@
-import React from "react";
+import React, {useState} from "react";
+import {Box, Container, CssBaseline} from '@mui/material';
+import {styled} from "@mui/material/styles";
 import NavBar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import {Box, Container, CssBaseline} from '@mui/material';
+import TakeNoteOne from "../components/notes/TakeNoteOne";
+import TakeNoteTwo from "../components/notes/TakeNoteTwo";
+
+const NoteContainer = styled(Box)(
+    ({theme}) => ({
+        boxShadow: theme.shadows[10],
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: theme.palette.common.white,
+        width: 500,
+        marginBottom: "5rem",
+        marginLeft: "auto",
+        marginRight: "auto",
+        padding: "10px"
+    }));
 
 export default function Component() {
+    const [isNoteOneBoxActive, setIsNoteOneBoxActive] = useState(true)
+    const toggleNoteBox = ()=>setIsNoteOneBoxActive(false)
+
     return (
         <React.Fragment>
             <Box sx={{display: 'flex'}}>
-                <CssBaseline/>
-                <NavBar/>
-                <Sidebar/>
-                <Container sx={{mt: 10}}>
+                <CssBaseline/><NavBar/><Sidebar/>
+                <Container sx={{mt: "10rem"}}>
+                    <NoteContainer>
+                        {isNoteOneBoxActive ?<TakeNoteOne toggleNoteBox={toggleNoteBox} />: <TakeNoteTwo />}
+                    </NoteContainer>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet ea facere id, ipsum nam nostrum
                     officiis quod veniam? A accusantium amet assumenda commodi debitis deserunt dicta distinctio
                     dolor dolore dolorem ea excepturi exercitationem expedita explicabo fuga harum ipsum itaque iure

@@ -1,21 +1,11 @@
 import React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
+import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
 
 const drawerWidth = 240;
 const styles = {
-    drawer: {
-        width: drawerWidth, flexShrink: 0,
-        [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: 'border-box'},
-    }
+    drawer: {width: drawerWidth, flexShrink: 0, [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: 'border-box'},}
 }
 
 export default function Sidebar() {
