@@ -5,7 +5,6 @@ import {
     ArchiveOutlined,
     ImageOutlined,
     MoreVertOutlined,
-    PaletteOutlined,
     PersonAddAlt,
     RedoOutlined,
     UndoOutlined
@@ -58,12 +57,11 @@ export default function TakeNoteTwo(props) {
                 </Grid>
                 <Grid item xs={12}>
                     <Grid container>
-
                         <Grid item xs={10} sx={{display: "flex", justifyContent: "space-around"}}>
-                            <IconButton size={"small"} onClick={e => setData({...data, is_archived: true})}>
+                            <ColorPopper colorHandler={noteTwoColorUpdate}/>
+                            <IconButton size={"small"} onClick={() => setData({...data, is_archived: true})}>
                                 <ArchiveOutlined fontSize={"inherit"}/>
                             </IconButton>
-                            <ColorPopper action="create" colorHandler={noteTwoColorUpdate}/>
                             {iconList.map((item, i) => (<IconButton key={i} size={"small"}>{item}</IconButton>))}
                         </Grid>
 

@@ -1,11 +1,15 @@
 import axios from "axios";
 
 const auth = axios.create({
-    baseURL: 'http://127.0.0.1:8000'
+    baseURL: 'http://localhost:8000/api'
 });
 
 export const loginApi = async (obj) => {
-    return await auth.post('/api/login/', obj)
+    return await auth.post('/login/', obj)
+}
+
+export const signUpAPI = async (obj)=>{
+    return await auth.post( '/auth/register/', obj)
 }
 
 auth.interceptors.request.use(
@@ -14,6 +18,3 @@ auth.interceptors.request.use(
         return config;
     }, err => Promise.reject(err));
 
-// export const userSignUp = async (obj)=>{
-//     return await axios.post(BASE_URI + 'api/auth/register/', obj)
-// }

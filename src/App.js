@@ -1,15 +1,16 @@
-import './App.css';
-import React from "react";
-import Dashboard from "./pages/Dashboard";
-import LogIn from "./pages/LogIn";
+import './App.css'
+import React from 'react'
+
+import { Provider } from 'react-redux'
+import store from './redux/store'
+import { Router } from './router'
 
 function App() {
-    return (
-        <div className="App">
-            {/*<LogIn />*/}
-            <Dashboard />
-        </div>
-    );
+	return (
+		<Provider store={store}>
+			<Router />
+		</Provider>
+	)
 }
 
-export default App;
+export default App
